@@ -1,4 +1,5 @@
 using AMKTest.Data;
+using AMKTest.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -15,6 +16,10 @@ builder.Services.AddDbContext<AMKDbContext>(
     {
         options.UseSqlServer(builder.Configuration.GetConnectionString("DConn"));
     });
+
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
